@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "WBMTR546A2.com.debai.app",
+        "paths": ["/invite/*"]
+      },
+      {
+        "appID": "WBMTR546A2.com.debai.app.dev",
+        "paths": ["/invite/*"]
+      }
+    ]
+  }
+}
