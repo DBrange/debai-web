@@ -5,41 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DebAI</title>
   <style>
-    :root { color-scheme: light dark; }
+    @font-face {
+      font-family: "Nunito";
+      src: url("/legal/assets/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+      font-weight: 200 1000;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #f5f6f8;
+      --surface: #ffffff;
+      --text: #1f2330;
+      --text-soft: #565d6d;
+      --muted: #8a90a0;
+      --border: #e6e8ee;
+      --brand: #F26654;
+      --brand-soft: #fdece8;
+      --shadow: 0 1px 2px rgba(20, 24, 40, .04), 0 12px 32px rgba(20, 24, 40, .06);
+    }
+    :root { color-scheme: light; }
+
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0f0f12;
-      color: #f5f5f5;
+      font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       text-align: center;
       padding: 24px;
-      box-sizing: border-box;
     }
-    .card { max-width: 380px; }
-    h1 { font-size: 24px; margin-bottom: 8px; }
-    p { color: #9a9a9f; font-size: 15px; line-height: 1.5; }
+
+    .card {
+      max-width: 380px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 36px 28px;
+    }
+
+    .brand-mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin: 0 auto 18px;
+      display: block;
+    }
+
+    h1 { font-size: 22px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 8px; }
+    p { color: var(--text-soft); font-size: 15px; line-height: 1.55; margin: 0; }
+
     a.button {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
+      margin-top: 22px;
+      padding: 12px 26px;
       border-radius: 999px;
-      background: #ff6b57;
-      color: #0f0f12;
-      font-weight: 600;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
       text-decoration: none;
       font-size: 15px;
+      box-shadow: 0 6px 16px rgba(242, 102, 84, .32);
     }
+    a.button:hover { background: #e05744; }
 
     /* Badges de tiendas — usados por el fallback de invitación (ver script) */
     .store-badges {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      margin-top: 24px;
+      gap: 10px;
+      margin-top: 22px;
       flex-wrap: wrap;
     }
     .store-badge {
@@ -49,27 +90,25 @@
       padding: 8px 14px;
       border-radius: 10px;
       background: #000;
-      border: 1px solid #3a3a3f;
+      border: 1px solid #000;
       color: #fff;
       text-decoration: none;
       text-align: left;
       line-height: 1.15;
     }
-    .store-badge:hover { text-decoration: none; background: #1a1a1d; }
+    .store-badge:hover { text-decoration: none; background: #222; }
     .store-badge svg { width: 24px; height: 24px; flex-shrink: 0; }
     .store-badge__eyebrow { display: block; font-size: 9px; letter-spacing: .03em; color: #cfcfd2; }
     .store-badge__name { display: block; font-size: 15px; font-weight: 600; }
-    .store-badge--disabled {
-      opacity: .5;
-      cursor: default;
-      pointer-events: none;
-    }
+    .store-badge--disabled { opacity: .45; cursor: default; pointer-events: none; }
   </style>
 </head>
 <body>
   <div class="card" id="content">
+    <img class="brand-mark" src="/legal/assets/icon.webp" alt="DebAI" width="56" height="56" />
     <h1>Página no encontrada</h1>
     <p>Este link no existe o ya no está disponible.</p>
+    <a class="button" href="/">Ir al inicio</a>
   </div>
   <script>
     // GitHub Pages no soporta rutas dinámicas en un sitio estático — este
@@ -79,6 +118,7 @@
     // solo distingue el copy, no hay nada que resolver del lado del sitio.
     if (location.pathname.startsWith('/invite/')) {
       document.getElementById('content').innerHTML =
+        '<img class="brand-mark" src="/legal/assets/icon.webp" alt="DebAI" width="56" height="56" />' +
         '<h1>Te invitaron a una lista en DebAI</h1>' +
         '<p>Para unirte necesitás tener la app instalada. Descargala y volvé a abrir este mismo link.</p>' +
         '<div class="store-badges">' +
