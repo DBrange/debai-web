@@ -97,6 +97,8 @@ def jsonld(lang: str, t: dict) -> str:
                 "@id": SITE + "#website",
                 "url": SITE,
                 "name": "DebAi",
+                # Sin esto Google muestra el dominio ("debai.app") como nombre del sitio
+                "alternateName": "DebAi App",
                 "inLanguage": lang,
                 "publisher": {"@id": org},
             },
