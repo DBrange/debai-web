@@ -19,9 +19,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://debai.app/"
 
-# Idiomas publicados, en orden. Para activar el alemán: agregar "de" (cuando haya
-# capturas en alemán, ver `shots`). El primero es el idioma por defecto (x-default).
-ENABLED = ["en", "es"]
+# Idiomas publicados, en orden. El primero es el idioma por defecto (x-default).
+# El alemán usa las capturas en inglés hasta que haya capturas en alemán (ver `shots`).
+ENABLED = ["en", "es", "de"]
 
 LANGS = {
     # path: carpeta de salida y URL · shots: sufijo de las capturas localizadas

@@ -9,6 +9,7 @@
   <link rel="canonical" href="https://debai.app/" />
   <link rel="alternate" hreflang="en" href="https://debai.app/" />
   <link rel="alternate" hreflang="es" href="https://debai.app/es/" />
+  <link rel="alternate" hreflang="de" href="https://debai.app/de/" />
   <link rel="alternate" hreflang="x-default" href="https://debai.app/" />
   <meta name="theme-color" content="#F26654" />
   <meta name="application-name" content="DebAi" />
@@ -21,6 +22,7 @@
   <meta property="og:description" content="DebAi, the app to track expenses with AI: log them by voice, receipt photo or bank notification. Shared lists to split expenses with anyone. 7-day free trial on iPhone and Android." />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="es_LA" />
+  <meta property="og:locale:alternate" content="de_DE" />
   <meta property="og:image" content="https://debai.app/assets/og-en.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -360,7 +362,7 @@
         <a href="#funciones">Features</a>
         <a href="#preguntas">FAQ</a>
       </nav>
-      <nav class="lang" aria-label="Language"><a href="./" hreflang="en" lang="en" aria-current="page">EN</a><a href="es/" hreflang="es" lang="es">ES</a></nav>
+      <nav class="lang" aria-label="Language"><a href="./" hreflang="en" lang="en" aria-current="page">EN</a><a href="es/" hreflang="es" lang="es">ES</a><a href="de/" hreflang="de" lang="de">DE</a></nav>
       <a class="nav-cta" href="#descargar">Download</a>
     </div>
   </header>
@@ -573,7 +575,7 @@
 
   <script>
     (function () {
-      var HERE = "en", HOMES = {"en": "./", "es": "es/"};
+      var HERE = "en", HOMES = {"en": "./", "es": "es/", "de": "de/"};
       function go(l) { location.replace(HOMES[l] + location.hash); }
       function saved() { try { return localStorage.getItem("debai.lang"); } catch (e) { return null; } }
       document.querySelectorAll(".lang a").forEach(function (a) {

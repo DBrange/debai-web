@@ -9,6 +9,7 @@
   <link rel="canonical" href="https://debai.app/es/" />
   <link rel="alternate" hreflang="en" href="https://debai.app/" />
   <link rel="alternate" hreflang="es" href="https://debai.app/es/" />
+  <link rel="alternate" hreflang="de" href="https://debai.app/de/" />
   <link rel="alternate" hreflang="x-default" href="https://debai.app/" />
   <meta name="theme-color" content="#F26654" />
   <meta name="application-name" content="DebAi" />
@@ -21,6 +22,7 @@
   <meta property="og:description" content="DebAi, la app para controlar tus gastos con IA: anótalos con la voz, una foto del ticket o el aviso del banco. Listas compartidas para dividir gastos. Prueba gratis de 7 días en iPhone y Android." />
   <meta property="og:locale" content="es_LA" />
   <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="de_DE" />
   <meta property="og:image" content="https://debai.app/assets/og-es.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -360,7 +362,7 @@
         <a href="#funciones">Funciones</a>
         <a href="#preguntas">Preguntas</a>
       </nav>
-      <nav class="lang" aria-label="Idioma"><a href="../" hreflang="en" lang="en">EN</a><a href="./" hreflang="es" lang="es" aria-current="page">ES</a></nav>
+      <nav class="lang" aria-label="Idioma"><a href="../" hreflang="en" lang="en">EN</a><a href="./" hreflang="es" lang="es" aria-current="page">ES</a><a href="../de/" hreflang="de" lang="de">DE</a></nav>
       <a class="nav-cta" href="#descargar">Descargar</a>
     </div>
   </header>
@@ -573,7 +575,7 @@
 
   <script>
     (function () {
-      var HERE = "es", HOMES = {"en": "../", "es": "./"};
+      var HERE = "es", HOMES = {"en": "../", "es": "./", "de": "../de/"};
       function go(l) { location.replace(HOMES[l] + location.hash); }
       function saved() { try { return localStorage.getItem("debai.lang"); } catch (e) { return null; } }
       document.querySelectorAll(".lang a").forEach(function (a) {
