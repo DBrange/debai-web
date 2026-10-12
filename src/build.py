@@ -20,14 +20,15 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://debai.app/"
 
 # Idiomas publicados, en orden. El primero es el idioma por defecto (x-default).
-# El alemán usa las capturas en inglés hasta que haya capturas en alemán (ver `shots`).
+# El alemán usa las capturas en inglés salvo las que ya tienen versión en alemán (ver `own_shots`).
 ENABLED = ["en", "es", "de"]
 
 LANGS = {
     # path: carpeta de salida y URL · shots: sufijo de las capturas localizadas
+    # own_shots: capturas que existen en el idioma aunque `shots` apunte a otro
     "en": {"path": "", "shots": "en"},
     "es": {"path": "es/", "shots": "es"},
-    "de": {"path": "de/", "shots": "en"},
+    "de": {"path": "de/", "shots": "en", "own_shots": {"voice"}},
 }
 
 APP_STORE = "https://apps.apple.com/app/id6796000118"
@@ -66,8 +67,12 @@ def translate_body(src: str, lang: str, t: dict) -> str:
     src = re.sub(r'alt="" data-i18n-alt="([^"]+)"', alt, src)
     src = re.sub(r'\sdata-i18n(?:-html)?="[^"]+"', "", src)
 
-    shots = LANGS[lang]["shots"]
-    src = re.sub(r'data-shot="[^"]+" src="(assets/screens/[a-z]+)-es\.webp"', rf'src="\1-{shots}.webp"', src)
+    def shot(m):
+        name = m.group(1)
+        suffix = lang if name in LANGS[lang].get("own_shots", ()) else LANGS[lang]["shots"]
+        return f'src="assets/screens/{name}-{suffix}.webp"'
+
+    src = re.sub(r'data-shot="[^"]+" src="assets/screens/([a-z]+)-es\.webp"', shot, src)
     return src
 
 
