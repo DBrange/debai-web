@@ -26,7 +26,7 @@
   <meta property="og:image" content="https://debai.app/assets/og-es.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="DebAi: tus gastos claros, solo o con los tuyos" />
+  <meta property="og:image:alt" content="DebAi: tus gastos claros, solo o en compañía" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="App para controlar gastos con IA y dividir gastos | DebAi App" />
   <meta name="twitter:description" content="DebAi, la app para controlar tus gastos con IA: anótalos con la voz, una foto del ticket o el aviso del banco. Listas compartidas para dividir gastos. Prueba gratis de 7 días en iPhone y Android." />
@@ -251,6 +251,48 @@
     .feature .copy p { color: var(--text-soft); font-size: 16px; margin: 0 0 16px; max-width: 30em; }
     .feature .shots { display: flex; justify-content: center; align-items: flex-start; gap: 18px; }
     .feature .shots .phone.sm:nth-child(2) { margin-top: 50px; }
+    /* ---------- Piezas que sobresalen del teléfono ----------
+       Van encima de la captura, en coordenadas de la imagen (600×1299): top en % del alto,
+       left/right en % del ancho. Cada idioma tiene su captura, así que cada uno su posición. */
+    .pops { position: absolute; inset: calc(var(--w) * .038); z-index: 2; pointer-events: none; }
+    .fx-pop {
+      position: absolute; right: -11%; top: var(--y); transform: translateY(-50%);
+      background: #fff; color: var(--text); font-weight: 800; letter-spacing: -.01em; white-space: nowrap;
+      font-size: calc(var(--w) * .068); line-height: 1; padding: .6em 1em; border-radius: 999px;
+      box-shadow: 0 1px 2px rgba(20, 24, 40, .06), 0 14px 30px -12px rgba(20, 24, 40, .3);
+    }
+    .fx-pop:nth-child(1) { --y: 43.34%; }
+    .fx-pop:nth-child(2) { --y: 51.89%; }
+    .fx-pop:nth-child(3) { --y: 60.43%; }
+    .fx-pop:nth-child(4) { --y: 68.98%; }
+    .fx-pop:nth-child(5) { --y: 77.52%; }
+    :is(html[lang="en"], html[lang="de"]) .fx-pop:nth-child(1) { --y: 37.64%; }
+    :is(html[lang="en"], html[lang="de"]) .fx-pop:nth-child(2) { --y: 46.19%; }
+    :is(html[lang="en"], html[lang="de"]) .fx-pop:nth-child(3) { --y: 54.73%; }
+    :is(html[lang="en"], html[lang="de"]) .fx-pop:nth-child(4) { --y: 63.28%; }
+    :is(html[lang="en"], html[lang="de"]) .fx-pop:nth-child(5) { --y: 71.82%; }
+    /* La card de movimientos detectados es un recorte agrandado de la misma captura */
+    .bank-pop {
+      --x0: 18; --y0: 516; --cw: 564; --ch: 482;
+      position: absolute; left: 50%; top: calc((var(--y0) + var(--ch) / 2) / 1299 * 100%);
+      width: calc(var(--cw) / 600 * 118%); transform: translate(-50%, -50%);
+      padding: calc(var(--w) * .03) calc(var(--w) * .02); background: #fcfbfc; border-radius: calc(var(--w) * .085);
+      box-shadow: 0 1px 2px rgba(20, 24, 40, .06), 0 24px 50px -18px rgba(20, 24, 40, .35);
+    }
+    :is(html[lang="en"], html[lang="de"]) .bank-pop { --y0: 484; }
+    .bank-pop div { aspect-ratio: var(--cw) / var(--ch); overflow: hidden; }
+    .bank-pop img {
+      width: calc(600 / var(--cw) * 100%); max-width: none; height: auto;
+      margin-left: calc(var(--x0) / var(--cw) * -100%); margin-top: calc(var(--y0) / var(--cw) * -100%);
+    }
+    /* Entrada al llegar con el scroll (solo con JS: sin JS se ven quietas) */
+    .js-pops .pops > * { transition: opacity .5s ease, translate .6s cubic-bezier(.2, .9, .3, 1.15); }
+    .js-pops .pops:not(.shown) > * { opacity: 0; translate: -14% 0; }
+    .js-pops .pops:not(.shown) > .bank-pop { translate: 0 12%; }
+    .fx-pop:nth-child(2) { transition-delay: .07s; }
+    .fx-pop:nth-child(3) { transition-delay: .14s; }
+    .fx-pop:nth-child(4) { transition-delay: .21s; }
+    .fx-pop:nth-child(5) { transition-delay: .28s; }
     .note { font-size: 13.5px !important; color: var(--muted) !important; }
     .checks { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
     .checks li { display: flex; gap: 12px; align-items: flex-start; font-weight: 700; }
@@ -372,7 +414,7 @@
       <div class="wrap">
         <div>
           <span class="eyebrow">7 días gratis en el plan anual</span>
-          <h1>Tus gastos claros.<br><em>Solo o con los tuyos.</em></h1>
+          <h1>Tus gastos claros.<br><em>Solo o en compañía.</em></h1>
           <p class="lead">Anota un gasto hablando, con una foto del ticket o desde la notificación del banco. DebAi lo ordena por categoría y te muestra cuánto te queda de cada tope.</p>
           <ul class="ways">
             <li><svg><use href="#i-mic"/></svg><span>Voz</span></li>
@@ -436,7 +478,7 @@
           <div>
             <span class="pill"><svg width="14" height="14"><use href="#i-users"/></svg><span>Lo que nos distingue</span></span>
             <p class="kicker">Listas compartidas</p>
-            <h2>Cuentas claras con los tuyos</h2>
+            <h2>Cuentas claras conservan la amistad</h2>
             <p>Crea una lista con tu pareja, tus roomies o el grupo del viaje. Cada gasto dice quién pagó y entre quiénes se divide, y DebAi lleva la cuenta de lo que se deben.</p>
             <ul class="checks">
               <li><svg><use href="#i-check"/></svg><span>Invitas con un link</span></li>
@@ -471,7 +513,14 @@
             <p>Cuando llega la notificación de un pago, DebAi te lo deja listo para aceptar, con monto y comercio. Nada se guarda sin que lo confirmes.</p>
             <p class="note">En Android, con las notificaciones de tu banco. En iPhone, con una automatización de Apple Pay en Atajos.</p>
           </div>
-          <div class="shots"><div class="phone"><img src="../assets/screens/bank-es.webp" alt="Pagos detectados desde las notificaciones del banco" decoding="async" width="600" height="1299" /></div></div>
+          <div class="shots">
+            <div class="phone">
+              <img src="../assets/screens/bank-es.webp" alt="Pagos detectados desde las notificaciones del banco" decoding="async" width="600" height="1299" />
+              <div class="pops" aria-hidden="true">
+                <div class="bank-pop"><div><img src="../assets/screens/bank-es.webp" alt="" decoding="async" width="600" height="1299" /></div></div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="feature">
@@ -480,7 +529,18 @@
             <h2>¿De viaje? Anota en la moneda que pagaste</h2>
             <p>Pesos, dólares, euros o yenes en la misma lista. DebAi convierte con tipos de cambio actualizados y te muestra el total en tu moneda.</p>
           </div>
-          <div class="shots"><div class="phone"><img src="../assets/screens/currencies-es.webp" alt="Gastos en varias monedas" decoding="async" width="600" height="1299" /></div></div>
+          <div class="shots">
+            <div class="phone">
+              <img src="../assets/screens/currencies-es.webp" alt="Gastos en varias monedas" decoding="async" width="600" height="1299" />
+              <div class="pops" aria-hidden="true">
+                <span class="fx-pop">€60,00</span>
+                <span class="fx-pop">JPY¥600</span>
+                <span class="fx-pop">USD$60,00</span>
+                <span class="fx-pop">ARS$900.000,00</span>
+                <span class="fx-pop">ARS$400.000,00</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="feature flip">
@@ -565,7 +625,7 @@
 
   <footer>
     <div class="wrap">
-      <span>© 2026 DebAi App</span>
+      <span>© 2026 DebAi</span>
       <nav>
         <a href="../legal/index.html">Privacidad</a>
         <a href="../legal/terminos.html">Términos</a>
@@ -598,6 +658,17 @@
         if (HOMES[l]) { if (l !== HERE) go(l); return; }
       }
     })();
+  </script>
+  <script>
+    if ("IntersectionObserver" in window) {
+      document.documentElement.classList.add("js-pops");
+      var popsObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("shown"); popsObserver.unobserve(e.target); }
+        });
+      }, { threshold: 0.35 });
+      document.querySelectorAll(".pops").forEach(function (el) { popsObserver.observe(el); });
+    }
   </script>
 </body>
 </html>
